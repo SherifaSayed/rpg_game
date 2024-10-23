@@ -59,8 +59,10 @@ int main()
     //--------------- Load ------------
     Texture playerTexture;
     Sprite PlayerSprite;
-    int Xindex = 0;
-    int Yindex = 0;
+    int RightindexX = 0;
+    int leftindexX = 0;
+    int UpindexY = 0;
+    int DownindexY = 0;
     if (playerTexture.loadFromFile("assets/Player/Textures/SkSoriteSheet.png"))
     {
         cout << "Player Image Loaded " << endl;
@@ -70,50 +72,55 @@ int main()
     {
         cout << "PLayer Image Failed To Load " << endl;
     }
+   
+    PlayerSprite.setTextureRect(IntRect(0, 64 * 2, 64, 64));
     while (window.isOpen())
     {
         //--------------- Update ------------
         Event event;
-      playerTexture.loadFromFile("assets/Player/Textures/SkSoriteSheet.png");
-      PlayerSprite.setTextureRect(IntRect(0, 2 * 64, 64, 64));
+    
         while (window.pollEvent(event))
         {
             if (event.type == Event::Closed)
                  window.close();
-          //if (event.type == Event::KeyPressed)
-          //  {
-          //      if (event.key.code == Keyboard::D) 
-          //      {
-          //         
-          //          for (int i = 0; i < 4; i++)
-          //          {
-          //            
-          //              /*PlayerSprite.setTexture(playerTexture);*/
-          //           /*   PlayerSprite.scale(Vector2f(2, 2));*/
-          //          }
-        
-          //      }
-          //  }
+         
         }
+        float animationFrameRate = 10.0f;
+        
         if (Keyboard::isKeyPressed(Keyboard::D))
         {
             Vector2f pos = PlayerSprite.getPosition();
-            PlayerSprite.setPosition(pos + Vector2f(2, 0));
+            PlayerSprite.setPosition(pos + Vector2f(0.03f, 0));
+            if (RightindexX >= 9)
+                   RightindexX =0;
+               PlayerSprite.setTextureRect(IntRect(++RightindexX* 64, 64 * 3, 64, 64));
+             
+            
         }
         if (Keyboard::isKeyPressed(Keyboard::A))
         {
             Vector2f pos = PlayerSprite.getPosition();
-            PlayerSprite.setPosition(pos + Vector2f(-2, 0));
+            PlayerSprite.setPosition(pos + Vector2f(-0.03, 0));
+            if (leftindexX >= 9)
+                leftindexX = 0;
+            PlayerSprite.setTextureRect(IntRect(++leftindexX * 64, 64 , 64, 64));
+
         }
         if (Keyboard::isKeyPressed(Keyboard::W))
         {
             Vector2f pos = PlayerSprite.getPosition();
-            PlayerSprite.setPosition(pos + Vector2f(0, -2));
+            PlayerSprite.setPosition(pos + Vector2f(0, -0.03));
+            if (UpindexY >= 9)
+                  UpindexY = 0;
+            PlayerSprite.setTextureRect(IntRect(++UpindexY * 64, 0, 64, 64));
         }
         if (Keyboard::isKeyPressed(Keyboard::S))
         {
             Vector2f pos = PlayerSprite.getPosition();
-            PlayerSprite.setPosition(pos + Vector2f(0, 2));
+            PlayerSprite.setPosition(pos + Vector2f(0, 0.03));
+                if (DownindexY >= 9)
+                    DownindexY = 0;
+            PlayerSprite.setTextureRect(IntRect(++DownindexY * 64, 64*2, 64, 64));
         }
         /*{*/
             
