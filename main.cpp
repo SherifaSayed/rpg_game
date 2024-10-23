@@ -56,30 +56,74 @@ int main()
     ContextSettings settings;
     settings.antialiasingLevel = 8;
     RenderWindow window(VideoMode(800, 800), "RPG Game");
-    CircleShape circle(50.0f);
-    RectangleShape rec(Vector2f(120.f, 50.f));
-    rec.setPosition(450, 450);
-    circle.setFillColor(Color::Blue);
-    rec.setFillColor(Color::Green);
-    rec.setOrigin(rec.getSize()/2.0f);
-    rec.setRotation(0);
-    circle.setPosition(350.0f, 350.0f);
-
+    //--------------- Load ------------
+    Texture playerTexture;
+    Sprite PlayerSprite;
+    int Xindex = 0;
+    int Yindex = 0;
+    if (playerTexture.loadFromFile("assets/Player/Textures/SkSoriteSheet.png"))
+    {
+        cout << "Player Image Loaded " << endl;
+        PlayerSprite.setTexture(playerTexture);
+    }
+    else
+    {
+        cout << "PLayer Image Failed To Load " << endl;
+    }
     while (window.isOpen())
     {
         //--------------- Update ------------
         Event event;
+      playerTexture.loadFromFile("assets/Player/Textures/SkSoriteSheet.png");
+      PlayerSprite.setTextureRect(IntRect(0, 2 * 64, 64, 64));
         while (window.pollEvent(event))
         {
             if (event.type == Event::Closed)
                  window.close();
+          //if (event.type == Event::KeyPressed)
+          //  {
+          //      if (event.key.code == Keyboard::D) 
+          //      {
+          //         
+          //          for (int i = 0; i < 4; i++)
+          //          {
+          //            
+          //              /*PlayerSprite.setTexture(playerTexture);*/
+          //           /*   PlayerSprite.scale(Vector2f(2, 2));*/
+          //          }
+        
+          //      }
+          //  }
         }
+        if (Keyboard::isKeyPressed(Keyboard::D))
+        {
+            Vector2f pos = PlayerSprite.getPosition();
+            PlayerSprite.setPosition(pos + Vector2f(2, 0));
+        }
+        if (Keyboard::isKeyPressed(Keyboard::A))
+        {
+            Vector2f pos = PlayerSprite.getPosition();
+            PlayerSprite.setPosition(pos + Vector2f(-2, 0));
+        }
+        if (Keyboard::isKeyPressed(Keyboard::W))
+        {
+            Vector2f pos = PlayerSprite.getPosition();
+            PlayerSprite.setPosition(pos + Vector2f(0, -2));
+        }
+        if (Keyboard::isKeyPressed(Keyboard::S))
+        {
+            Vector2f pos = PlayerSprite.getPosition();
+            PlayerSprite.setPosition(pos + Vector2f(0, 2));
+        }
+        /*{*/
+            
+              
+       /* }*/
         //------------------- End Update ---------------
 
         //----------------------------- DRAW ----------------------- 
         window.clear(Color::Black);
-        window.draw(circle);
-        window.draw(rec);
+        window.draw(PlayerSprite);
         window.display(); // the data from back buffer to screen after the clear
     }
 
