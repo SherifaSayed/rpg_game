@@ -90,31 +90,28 @@ int main()
         if (Keyboard::isKeyPressed(Keyboard::D))
         {
                PlayerSprite.setPosition(pos + Vector2f(0.03f, 0));
-               PlayerSprite.setTextureRect(IntRect(RightindexX* 64, 64 * 3, 64, 64));
+               PlayerSprite.setTextureRect(IntRect(RightindexX * 64, 64 * 3, 64, 64));
                RightindexX = (RightindexX + 1) % 9;
         }
         if (Keyboard::isKeyPressed(Keyboard::A))
         {
         
             PlayerSprite.setPosition(pos + Vector2f(-0.03, 0));
-           
             PlayerSprite.setTextureRect(IntRect(leftindexX * 64, 64 , 64, 64));
-            leftindexX = (leftindexX +1)% 9;
+            leftindexX = (leftindexX + 1) % 9;
 
         }
         if (Keyboard::isKeyPressed(Keyboard::W))
         {
           
             PlayerSprite.setPosition(pos + Vector2f(0, -0.03));
-            
             PlayerSprite.setTextureRect(IntRect(UpindexY * 64, 0, 64, 64));
-            UpindexY =( UpindexY + 1 )% 9;
+            UpindexY =(UpindexY + 1) % 9;
         }
         if (Keyboard::isKeyPressed(Keyboard::S))
         {
          
             PlayerSprite.setPosition(pos + Vector2f(0, 0.03));
-           
             PlayerSprite.setTextureRect(IntRect(DownindexY * 64, 64*2, 64, 64));
             DownindexY = (DownindexY + 1) % 9;
         }
